@@ -1,0 +1,51 @@
+{
+    "name": "navigationbar",
+    "private": true,
+    "version": "1.0.0",
+    "type": "module",
+    "packageManager": "pnpm@10.6.4",
+    "scripts": {
+        "build:only": "tsc -b && vite build",
+        "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
+        "lint:fix": "eslint . --fix",
+        "format": "prettier --write \"src/**/*.{ts,tsx}\"",
+        "format:check": "prettier --check \"src/**/*.{ts,tsx}\"",
+        "build": "npm run format && npm run lint && npm run build:only"
+    },
+    "dependencies": {
+        "@radix-ui/react-dialog": "^1.1.6",
+        "@radix-ui/react-popover": "^1.1.6",
+        "@radix-ui/react-separator": "^1.1.2",
+        "@radix-ui/react-slot": "^1.1.2",
+        "@radix-ui/react-tooltip": "^1.1.8",
+        "@reduxjs/toolkit": "^2.6.1",
+        "class-variance-authority": "^0.7.1",
+        "clsx": "^2.1.1",
+        "cross-env": "^7.0.3",
+        "react": "^19.1.0",
+        "react-dom": "^19.1.0",
+        "react-icons": "^5.5.0",
+        "react-redux": "^9.2.0",
+        "tailwind-merge": "^3.1.0"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.24.0",
+        "@originjs/vite-plugin-federation": "^1.4.0",
+        "@tailwindcss/vite": "^4.1.3",
+        "@types/node": "^22.14.0",
+        "@types/react": "^18.3.20",
+        "@types/react-dom": "^18.3.6",
+        "@typescript-eslint/eslint-plugin": "^8.29.0",
+        "@typescript-eslint/parser": "^8.29.0",
+        "@vitejs/plugin-react": "^4.3.4",
+        "autoprefixer": "^10.4.21",
+        "eslint": "^9.24.0",
+        "eslint-plugin-react-hooks": "^5.2.0",
+        "eslint-plugin-react-refresh": "^0.4.19",
+        "globals": "^15.15.0",
+        "prettier": "^3.5.3",
+        "tailwindcss": "^4.1.3",
+        "typescript": "^5.8.3",
+        "vite": "^5.4.17"
+    }
+}
