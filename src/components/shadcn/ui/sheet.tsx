@@ -4,7 +4,7 @@ import { SheetContentProps } from "@/types";
 import { sheetVariants } from "../variants";
 import { SheetPortal } from "../constants";
 import { RxCross2 } from "react-icons/rx";
-import { cn } from "@/utils";
+import { cn } from "flixburst-utils";
 
 const SheetOverlay = forwardRef<ComponentRef<typeof Overlay>, ComponentPropsWithoutRef<typeof Overlay>>(({ className, ...props }, ref) => (
     <Overlay

@@ -1,2 +1,2 @@
 export * from "./mobile.hook";
-export * from "./sidebar.hook";
+export * from "./sidebar.hooks";

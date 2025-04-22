@@ -1,8 +1,8 @@
 import { SidebarMenuItem, SidebarMenuButton, BackButton } from "@/components";
 import { Fragment, useState, useEffect, memo, useCallback } from "react";
 import { ThemeSelectorProps, ThemeMenuItem, Theme } from "@/types";
+import { capitalize } from "flixburst-utils";
 import { FaCheck } from "react-icons/fa6";
-import { capitalize } from "@/utils";
 
 export const ThemeSelector = memo(function ThemeSelector(props: ThemeSelectorProps) {
     const { item, themeMenuOpen, toggleThemeMenu, itemIndex } = props;

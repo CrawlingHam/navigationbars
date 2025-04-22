@@ -3,7 +3,7 @@ import { SidebarMenu } from "@/components";
 import MenuContentItems from "./Items";
 
 export default function MenuContentItemsGroup(props: MenuContentItemsGroupProps) {
-    const { group, toggleThemeMenu, themeMenuOpen, toggleAccountMenu, accountMenuOpen, user } = props;
+    const { group, toggleThemeMenu, themeMenuOpen, toggleAccountMenu } = props;
     if (!group) return null;
 
     return (
@@ -12,12 +12,10 @@ export default function MenuContentItemsGroup(props: MenuContentItemsGroupProps)
                 <MenuContentItems
                     key={`menu-content-item-${itemIndex}-${item.label || itemIndex}`}
                     toggleAccountMenu={toggleAccountMenu}
-                    accountMenuOpen={accountMenuOpen}
                     toggleThemeMenu={toggleThemeMenu}
                     themeMenuOpen={themeMenuOpen}
                     itemIndex={itemIndex}
                     item={item}
-                    user={user}
                 />
             ))}
         </SidebarMenu>

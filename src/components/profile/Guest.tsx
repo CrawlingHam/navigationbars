@@ -1,5 +1,5 @@
 import { GuestProfileProps } from "@/types";
-import { cn } from "@/utils";
+import { cn } from "flixburst-utils";
 import { memo } from "react";
 
 export const GuestProfile = memo(function GuestProfile(props: GuestProfileProps) {

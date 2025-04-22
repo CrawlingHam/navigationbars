@@ -1,6 +1,6 @@
 import { ProfileImage } from "./ProfileImage";
 import { UserProfileProps } from "@/types";
-import { cn } from "@/utils";
+import { cn } from "flixburst-utils";
 import { memo } from "react";
 
 export const UserProfile = memo(function UserProfile(props: UserProfileProps) {

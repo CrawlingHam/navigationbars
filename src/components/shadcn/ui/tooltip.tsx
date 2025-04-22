@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, ComponentRef, forwardRef } from "react";
 import { Content, Portal } from "@radix-ui/react-tooltip";
-import { cn } from "@/utils";
+import { cn } from "flixburst-utils";
 
 const TooltipContent = forwardRef<ComponentRef<typeof Content>, ComponentPropsWithoutRef<typeof Content>>(
     ({ className, sideOffset = 4, ...props }, ref) => (

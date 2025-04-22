@@ -1,14 +1,15 @@
 import { TooltipContent, Separator, Skeleton, Button, Input, SidebarContext, useIsMobile, useSidebar } from "@/components";
-import { SIDEBAR_KEYBOARD_SHORTCUT, TooltipProvider, TooltipTrigger, SIDEBAR_WIDTH, Tooltip, Sheet } from "../constants";
 import { SIDEBAR_COOKIE_MAX_AGE, SIDEBAR_WIDTH_MOBILE, SIDEBAR_COOKIE_NAME, SIDEBAR_WIDTH_ICON } from "../constants";
+import { TooltipProvider, TooltipTrigger, SIDEBAR_WIDTH, Tooltip, Sheet } from "../constants";
 import { useMemo, CSSProperties, ComponentProps, ComponentRef, MouseEvent } from "react";
 import { SheetContent, SheetDescription, SheetHeader, SheetTitle } from "./sheet";
 import { SidebarContextProps, SidebarMenuButtonVariants } from "@/types";
-import { forwardRef, useState, useCallback, useEffect } from "react";
+import { forwardRef, useState, useCallback } from "react";
 import { sidebarMenuButtonVariants } from "../variants";
+import { useSidebarKeyboardShortcut } from "../hooks";
 import { LuPanelLeft } from "react-icons/lu";
 import { Slot } from "@radix-ui/react-slot";
-import { cn } from "@/utils";
+import { cn } from "flixburst-utils";
 
 const SidebarProvider = forwardRef<
     HTMLDivElement,
@@ -43,17 +44,7 @@ const SidebarProvider = forwardRef<
     }, [isMobile, setOpen, setOpenMobile]);
 
     // Adds a keyboard shortcut to toggle the sidebar.
-    useEffect(() => {
-        const handleKeyDown = (event: KeyboardEvent) => {
-            if (event.key === SIDEBAR_KEYBOARD_SHORTCUT && (event.metaKey || event.ctrlKey)) {
-                event.preventDefault();
-                toggleSidebar();
-            }
-        };
-
-        window.addEventListener("keydown", handleKeyDown);
-        return () => window.removeEventListener("keydown", handleKeyDown);
-    }, [toggleSidebar]);
+    useSidebarKeyboardShortcut(toggleSidebar);
 
     // We add a state so that we can do data-state="expanded" or "collapsed".
     // This makes it easier to style the sidebar with Tailwind classes.

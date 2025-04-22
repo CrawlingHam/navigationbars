@@ -1,5 +1,5 @@
 import { ProfileImageProps } from "@/types";
-import { cn } from "@/utils";
+import { cn } from "flixburst-utils";
 
 export const ProfileImage = (props: ProfileImageProps) => (
     <img

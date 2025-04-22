@@ -1,6 +1,6 @@
 import { forwardRef, ComponentRef, ComponentPropsWithoutRef } from "react";
 import { Root } from "@radix-ui/react-separator";
-import { cn } from "@/utils";
+import { cn } from "flixburst-utils";
 
 const Separator = forwardRef<ComponentRef<typeof Root>, ComponentPropsWithoutRef<typeof Root>>(
     ({ className, orientation = "horizontal", decorative = true, ...props }, ref) => (

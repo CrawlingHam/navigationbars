@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, ComponentRef, forwardRef } from "react";
 import { Content, Portal } from "@radix-ui/react-popover";
-import { cn } from "@/utils";
+import { cn } from "flixburst-utils";
 
 const PopoverContent = forwardRef<ComponentRef<typeof Content>, ComponentPropsWithoutRef<typeof Content>>(
     ({ className, align = "center", sideOffset = 13, ...props }, ref) => (

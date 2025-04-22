@@ -1,2 +1,2 @@
-export * from "./definitions";
-export * from "./props";
+export * from "./params";
+export * from "./models";
