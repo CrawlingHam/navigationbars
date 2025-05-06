@@ -1,0 +1,53 @@
+{
+    "name": "navigationbar-vue",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
+        "build": "npm run format && npm run lint && npm run build:only",
+        "format:check": "prettier --check \"src/**/*.{ts,vue}\"",
+        "start": "pnpm run build:only && pnpm run start:only",
+        "format": "prettier --write \"src/**/*.{ts,vue}\"",
+        "build:only": "vue-tsc -b && vite build",
+        "start:only": "vite preview --port 3000",
+        "lint:fix": "eslint . --fix",
+        "preview": "vite preview",
+        "dev": "vite"
+    },
+    "dependencies": {
+        "@vueuse/core": "^13.1.0",
+        "class-variance-authority": "^0.7.1",
+        "flixburst-environment_variables": "^1.0.8",
+        "flixburst-tailwind": "^1.0.2",
+        "flixburst-theme": "^1.0.1",
+        "flixburst-zod": "^1.0.4",
+        "lucide-vue-next": "^0.507.0",
+        "pinia": "^3.0.2",
+        "reka-ui": "^2.2.1",
+        "vue": "^3.5.13"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.26.0",
+        "@originjs/vite-plugin-federation": "^1.4.1",
+        "@tailwindcss/vite": "^4.1.5",
+        "@types/node": "^22.15.12",
+        "@typescript-eslint/eslint-plugin": "^8.32.0",
+        "@typescript-eslint/parser": "^8.32.0",
+        "@vitejs/plugin-vue": "^5.2.3",
+        "@vue/eslint-config-prettier": "^10.2.0",
+        "@vue/eslint-config-typescript": "^14.5.0",
+        "@vue/tsconfig": "^0.7.0",
+        "eslint": "^9.26.0",
+        "eslint-plugin-vue": "^10.1.0",
+        "globals": "^16.0.0",
+        "prettier": "^3.5.3",
+        "tailwindcss": "^4.1.5",
+        "terser": "^5.39.0",
+        "typescript": "~5.8.3",
+        "typescript-eslint": "^8.32.0",
+        "vite": "^6.3.5",
+        "vue-eslint-parser": "^10.1.3",
+        "vue-tsc": "^2.2.10"
+    }
+}
