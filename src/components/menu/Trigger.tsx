@@ -1,18 +1,22 @@
-import { Profile as ProfileType } from "flixburst-declarations";
+import type { Profile as ProfileType } from "@/types";
 import { PopoverTrigger } from "@/components";
-import { Profile } from "../profile";
-import { memo } from "react";
+import { memo, type JSX } from "react";
+import Profile from "../profile";
+import { cn } from "@/lib";
 
-export const MenuTrigger = memo(function MenuTrigger({ profile }: { profile: ProfileType | undefined }) {
-    const letter = profile?.name?.charAt(0) || profile?.email?.charAt(0).toUpperCase() || "G";
+const MenuTrigger = (props: ProfileType): JSX.Element => (
+    <PopoverTrigger asChild>
+        <button className="relative">
+            <div
+                className={cn(
+                    "w-9 h-9 rounded-full transition-all duration-200 hover:ring-2 hover:ring-primary/50 hover:scale-105",
+                    "flex items-center cursor-pointer bg-slate-200 dark:bg-slate-700 justify-center"
+                )}
+            >
+                <Profile letter={props.username?.charAt(0).toUpperCase() || "G"} dimensions={[32, 32]} src={props.picture} />
+            </div>
+        </button>
+    </PopoverTrigger>
+);
 
-    return (
-        <PopoverTrigger asChild>
-            <button className="relative">
-                <div className="flex items-center bg-slate-200 dark:bg-slate-700 justify-center w-9 h-9 rounded-full transition-all duration-200 hover:ring-2 hover:ring-primary/50 hover:scale-105">
-                    <Profile dimensions={[32, 32]} clickable={false} src={profile?.picture} letter={letter} />
-                </div>
-            </button>
-        </PopoverTrigger>
-    );
-});
+export default memo(MenuTrigger);

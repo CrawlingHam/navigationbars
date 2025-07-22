@@ -1,28 +1,19 @@
-import { allowedImageHostDomains } from "./allowedDomains";
-import { ProfileProps } from "@/types";
-import { GuestProfile } from "./Guest";
-import { UserProfile } from "./User";
-import { memo, useMemo } from "react";
+import type { ProfileProps } from "@/types";
+import { isValidImageSrc } from "@/utils";
+import GuestProfile from "./guest";
+import { type JSX } from "react";
+import UserProfile from "./user";
 
-export const Profile = memo(function Profile(props: ProfileProps) {
-    const { clickable, dimensions } = props;
-    const src = "src" in props ? props.src : undefined;
-    const alt = "src" in props ? props.alt : undefined;
-    const letter = "letter" in props ? props.letter : "";
+const Profile = (props: ProfileProps): JSX.Element => {
+    const containsLetter = "letter" in props;
+    const containsSrc = "src" in props;
 
-    const isValidImageSrc = useMemo(() => {
-        if (!src) return false;
+    const src = containsSrc ? props.src : undefined;
+    const alt = containsSrc ? props.alt : undefined;
+    const letter = containsLetter ? props.letter : "";
 
-        try {
-            const url = new URL(src);
-            return allowedImageHostDomains.some((host) => host.hostname === url.hostname);
-        } catch {
-            return false;
-        }
-    }, [src]);
+    if (isValidImageSrc(src)) return <UserProfile dimensions={props.dimensions} alt={alt} src={src} />;
+    return <GuestProfile dimensions={props.dimensions} letter={letter} />;
+};
 
-    const validImageSrc = isValidImageSrc && src && src.length > 10;
-
-    if (validImageSrc) return <UserProfile dimensions={dimensions} clickable={clickable} alt={alt} src={src} />;
-    return <GuestProfile dimensions={dimensions} clickable={clickable} letter={letter} />;
-});
+export default Profile;

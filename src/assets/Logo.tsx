@@ -1,4 +1,6 @@
-export default function FlixburstLogo({ className }: { className?: string }) {
+import type { JSX } from "react";
+
+export default function Logo({ className }: { className?: string }): JSX.Element {
     return (
         <svg className={`${className} fill-current`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1422 800">
             <defs>

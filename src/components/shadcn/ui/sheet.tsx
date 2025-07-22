@@ -1,26 +1,28 @@
-import { ComponentPropsWithoutRef, ComponentRef, forwardRef, HTMLAttributes } from "react";
+import { type ComponentPropsWithoutRef, type ComponentRef, forwardRef, type HTMLAttributes, type JSX } from "react";
 import { Close, Overlay, Content, Title, Description } from "@radix-ui/react-dialog";
-import { SheetContentProps } from "@/types";
+import type { SheetContentProps } from "@/types";
 import { sheetVariants } from "../variants";
 import { SheetPortal } from "../constants";
-import { RxCross2 } from "react-icons/rx";
-import { cn } from "flixburst-utils";
+import { X } from "lucide-react";
+import { cn } from "@/lib";
 
-const SheetOverlay = forwardRef<ComponentRef<typeof Overlay>, ComponentPropsWithoutRef<typeof Overlay>>(({ className, ...props }, ref) => (
-    <Overlay
-        className={cn(
-            "fixed inset-0 z-50 bg-black/80",
-            "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
-            className
-        )}
-        {...props}
-        ref={ref}
-    />
-));
+const SheetOverlay = forwardRef<ComponentRef<typeof Overlay>, ComponentPropsWithoutRef<typeof Overlay>>(
+    ({ className, ...props }, ref): JSX.Element => (
+        <Overlay
+            className={cn(
+                "fixed inset-0 z-50 bg-black/80",
+                "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+                className
+            )}
+            {...props}
+            ref={ref}
+        />
+    )
+);
 SheetOverlay.displayName = Overlay.displayName;
 
 const SheetContent = forwardRef<ComponentRef<typeof Content>, SheetContentProps>(
-    ({ side = "right", className, children, ...props }, ref) => (
+    ({ side = "right", className, children, ...props }, ref): JSX.Element => (
         <SheetPortal>
             <SheetOverlay />
             <Content ref={ref} className={cn(sheetVariants({ side }), className)} {...props}>
@@ -32,7 +34,7 @@ const SheetContent = forwardRef<ComponentRef<typeof Content>, SheetContentProps>
                         className
                     )}
                 >
-                    <RxCross2 className="h-4 w-4" />
+                    <X className="h-4 w-4" />
                     <span className="sr-only">Close</span>
                 </Close>
                 {children}
@@ -42,24 +44,23 @@ const SheetContent = forwardRef<ComponentRef<typeof Content>, SheetContentProps>
 );
 SheetContent.displayName = Content.displayName;
 
-const SheetHeader = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => (
+const SheetHeader = ({ className, ...props }: HTMLAttributes<HTMLDivElement>): JSX.Element => (
     <div className={cn("flex flex-col space-y-2 text-center sm:text-left", className)} {...props} />
 );
 SheetHeader.displayName = "SheetHeader";
 
-const SheetFooter = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => (
-    <div className={cn("flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2", className)} {...props} />
+const SheetTitle = forwardRef<ComponentRef<typeof Title>, ComponentPropsWithoutRef<typeof Title>>(
+    ({ className, ...props }, ref): JSX.Element => (
+        <Title ref={ref} className={cn("text-lg font-semibold text-foreground", className)} {...props} />
+    )
 );
-SheetFooter.displayName = "SheetFooter";
-
-const SheetTitle = forwardRef<ComponentRef<typeof Title>, ComponentPropsWithoutRef<typeof Title>>(({ className, ...props }, ref) => (
-    <Title ref={ref} className={cn("text-lg font-semibold text-foreground", className)} {...props} />
-));
 SheetTitle.displayName = Title.displayName;
 
 const SheetDescription = forwardRef<ComponentRef<typeof Description>, ComponentPropsWithoutRef<typeof Description>>(
-    ({ className, ...props }, ref) => <Description ref={ref} className={cn("text-sm text-muted-foreground", className)} {...props} />
+    ({ className, ...props }, ref): JSX.Element => (
+        <Description ref={ref} className={cn("text-sm text-muted-foreground", className)} {...props} />
+    )
 );
 SheetDescription.displayName = Description.displayName;
 
-export { SheetOverlay, SheetContent, SheetHeader, SheetFooter, SheetTitle, SheetDescription };
+export { SheetOverlay, SheetContent, SheetHeader, SheetTitle, SheetDescription };

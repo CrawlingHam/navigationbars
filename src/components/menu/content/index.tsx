@@ -1,17 +1,20 @@
 import { SidebarContent, SidebarGroup, SidebarGroupContent } from "@/components";
-import { MenuContentProps, MenuItemGroup } from "@/types";
-import MenuContentItemsGroup from "./ItemsGroup";
+import type { MenuContentProps, MenuItemGroup } from "@/types";
+import MenuContentItemsGroup from "./group";
+import { type JSX } from "react";
 
-export function MenuContent(props: MenuContentProps) {
-    const { groups } = props;
-    if (!groups) return null;
+export function MenuContent(props: MenuContentProps): JSX.Element | null {
+    if (!props.groups) return null;
 
     return (
         <SidebarContent className="py-2 h-auto flex-none">
-            {groups.map((group: MenuItemGroup, groupIndex: number) => (
-                <SidebarGroup key={`group-${groupIndex}`} className="border-b border-border/50 last:border-none">
+            {props.groups.map((group: MenuItemGroup, index: number) => (
+                <SidebarGroup
+                    key={`group-${index}`}
+                    className="border-b border-b-slate-200 dark:border-b-slate-600 last:border-none w-full"
+                >
                     <SidebarGroupContent className="gap-0">
-                        <MenuContentItemsGroup group={group} {...props} />
+                        <MenuContentItemsGroup group={group} themeMenuOpen={props.themeMenuOpen} toggleThemeMenu={props.toggleThemeMenu} />
                     </SidebarGroupContent>
                 </SidebarGroup>
             ))}
