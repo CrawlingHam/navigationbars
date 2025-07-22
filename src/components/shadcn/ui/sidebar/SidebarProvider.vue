@@ -4,7 +4,7 @@ import { useEventListener, useMediaQuery, useVModel } from "@vueuse/core";
 import { computed, type HTMLAttributes, type Ref, ref } from "vue";
 import { provideSidebarContext } from "../../contexts";
 import { TooltipProvider } from "reka-ui";
-import { cn } from "flixburst-tailwind";
+import { cn } from "@/lib";
 
 const props = withDefaults(
     defineProps<{

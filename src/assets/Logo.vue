@@ -1,18 +1,12 @@
 <script setup lang="ts">
-import { cn } from "flixburst-tailwind";
-import { computed } from "vue";
+import type { FlixburstLogoProps } from "@/types";
+import { cn } from "@/lib";
 
-export declare type FlixburstLogoProps = {
-    className?: string;
-};
-
-const { className } = defineProps<FlixburstLogoProps>();
-
-const svgStyling = computed(() => cn(className, "fill-current"));
+const props = defineProps<FlixburstLogoProps>();
 </script>
 
 <template>
-    <svg :class="svgStyling" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1422 800">
+    <svg :class="cn(props.class, 'fill-current')" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1422 800">
         <defs>
             <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="oooscillate-grad">
                 <stop stop-color="hsl(206, 75%, 49%)" stop-opacity="1" offset="0%"></stop>

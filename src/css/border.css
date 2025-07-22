@@ -1,23 +1,4 @@
-@import "tailwindcss";
-
-/* === Configure dark mode variant === */
-@custom-variant dark (&:where(.dark, .dark *));
-
-/* === Base theme variables === */
-
-@theme {
-    /* === Gradient Colors === */
-    --gradient-color: hsl(219, 100%, 65%);
-    --gradient-color-secondary: hsl(190, 100%, 50%);
-}
-
-/* === Dark mode theme variables === */
-.dark {
-    color-scheme: dark;
-}
-
 @layer components {
-    /* === Animated Border Bottom Component === */
     .animated-border-b {
         background-color: transparent;
         position: relative;

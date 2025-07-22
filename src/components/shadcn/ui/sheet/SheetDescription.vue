@@ -1,22 +1,19 @@
 <script setup lang="ts">
 import { DialogDescription, type DialogDescriptionProps } from "reka-ui";
-import { computed, type HTMLAttributes } from "vue";
-import { cn } from "flixburst-tailwind";
+import { delegatedProps } from "../../shared";
+import type { ClassProp } from "@/types";
+import { cn } from "@/lib";
 
-const props = defineProps<DialogDescriptionProps & { class?: HTMLAttributes["class"] }>();
+const props = defineProps<DialogDescriptionProps & ClassProp>();
 
-const delegatedProps = computed(() => {
-    const { class: _, ...delegated } = props;
-
-    return delegated;
-});
+const delegated = delegatedProps(props);
 </script>
 
 <template>
     <DialogDescription
         :class="cn('text-slate-900 dark:text-slate-200 text-sm', props.class)"
         data-slot="sheet-description"
-        v-bind="delegatedProps"
+        v-bind="delegated"
     >
         <slot />
     </DialogDescription>

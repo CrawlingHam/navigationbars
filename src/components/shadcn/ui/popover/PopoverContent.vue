@@ -1,26 +1,24 @@
 <script setup lang="ts">
 import { PopoverContent, PopoverPortal, useForwardPropsEmits } from "reka-ui";
 import type { PopoverContentEmits, PopoverContentProps } from "reka-ui";
-import { computed, type HTMLAttributes } from "vue";
-import { cn } from "flixburst-tailwind";
+import { delegatedProps } from "../../shared";
+import type { ClassProp } from "@/types";
+import { computed } from "vue";
+import { cn } from "@/lib";
 
 defineOptions({
     inheritAttrs: false,
 });
 
-const props = withDefaults(defineProps<PopoverContentProps & { class?: HTMLAttributes["class"] }>(), {
+const props = withDefaults(defineProps<PopoverContentProps & ClassProp>(), {
     align: "center",
     sideOffset: 4,
 });
 const emits = defineEmits<PopoverContentEmits>();
 
-const delegatedProps = computed(() => {
-    const { class: _, ...delegated } = props;
+const delegated = delegatedProps(props);
 
-    return delegated;
-});
-
-const forwarded = useForwardPropsEmits(delegatedProps, emits);
+const forwarded = useForwardPropsEmits(delegated, emits);
 
 const popoverContentStyling = computed(() =>
     cn(

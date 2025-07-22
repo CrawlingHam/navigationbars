@@ -1,33 +1,17 @@
 <script setup lang="ts">
-import type { MenuContentGroupProps } from "@/types";
-import { SidebarMenu } from "../../shadcn";
-import MenuContentItems from "./items.vue";
-import { ThemeSelector } from "../theme";
-import { computed } from "vue";
+import type { MenuContentItemsGroupProps } from "@/types";
+import { SidebarMenu } from "@/components/shadcn";
+import ThemeSelector from "../theme/selector.vue";
+import MenuItems from "./items.vue";
 
-const { group, toggleThemeMenu, themeMenuOpen, toggleAccountMenu } = defineProps<MenuContentGroupProps>();
-
-const shouldRender = computed(() => {
-    return !!group;
-});
+const props = defineProps<MenuContentItemsGroupProps>();
 </script>
 
 <template>
-    <template v-if="shouldRender">
-        <SidebarMenu class="h-full">
-            <div
-                v-for="(item, itemIndex) in group"
-                :key="`menu-content-item-${itemIndex}-${item.label || itemIndex}`"
-                class="flex flex-col gap-2 h-full"
-            >
-                <ThemeSelector :toggle-theme-menu="toggleThemeMenu" :theme-menu-open="themeMenuOpen" :item-index="itemIndex" :item="item" />
-                <MenuContentItems
-                    :toggle-account-menu="toggleAccountMenu"
-                    :toggle-theme-menu="toggleThemeMenu"
-                    :item-index="itemIndex"
-                    :item="item"
-                />
-            </div>
-        </SidebarMenu>
-    </template>
+    <SidebarMenu v-if="props.group" class="h-full">
+        <div v-for="(item, index) in props.group" :key="`mItem-${index}-${item.label || index}`" class="flex flex-col gap-2 h-full">
+            <ThemeSelector :toggle-theme-menu="props.toggleThemeMenu" :theme-menu-open="props.themeMenuOpen" :index="index" :item="item" />
+            <MenuItems :toggle-theme-menu="props.toggleThemeMenu" :index="index" :item="item" />
+        </div>
+    </SidebarMenu>
 </template>

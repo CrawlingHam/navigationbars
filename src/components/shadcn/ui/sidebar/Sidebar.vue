@@ -3,11 +3,9 @@ import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetHeader } from "
 import { SIDEBAR_WIDTH_MOBILE } from "../../constants";
 import { useSidebar } from "../../contexts";
 import type { SidebarProps } from "@/types";
-import { cn } from "flixburst-tailwind";
+import { cn } from "@/lib";
 
-defineOptions({
-    inheritAttrs: false,
-});
+defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(defineProps<SidebarProps>(), {
     collapsible: "offcanvas",

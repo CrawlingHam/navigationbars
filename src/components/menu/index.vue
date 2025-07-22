@@ -1,46 +1,25 @@
 <script setup lang="ts">
-import { Popover, PopoverContent, SidebarProvider, SidebarInset, Sidebar } from "../shadcn";
-import type { NavigationbarMenuProps } from "@/types";
+import { Sidebar, SidebarInset, SidebarProvider, Popover, PopoverContent } from "@/components/shadcn";
+import type { MenuItemGroups, NavigationbarMenuProps, ThemeSubMenuItem } from "@/types";
+import MenuContent from "./content/index.vue";
 import MenuTrigger from "./trigger.vue";
-import { MenuContent } from "./content";
-import { computed, ref, watch } from "vue";
+import groupContent from "./config";
+import { computed } from "vue";
 
 const props = defineProps<NavigationbarMenuProps>();
-const localOpen = ref(props.navbarMenuOpen);
 
-watch(
-    () => props.navbarMenuOpen,
-    (newValue) => {
-        localOpen.value = newValue;
-    }
-);
-
-const themeButtons = [{ id: "system" }, { id: "light" }, { id: "dark" }];
-const showBaseMenuContent = computed(() => !props.themeMenuOpen);
-
-const content = computed(() => {
-    return showBaseMenuContent.value
-        ? props.groups
-        : props.themeMenuOpen
-          ? [[{ label: "Theme Settings", themes: themeButtons }]]
-          : [[{ label: "Account Switcher" }]];
-});
+const groups = computed<MenuItemGroups | ThemeSubMenuItem[][]>(() => groupContent(props.themeMenuOpen, props.profile));
 </script>
 
 <template>
-    <Popover v-model:open="localOpen" @update:open="props.toggleNavbarMenu">
-        <MenuTrigger :profile="props.profile" />
+    <Popover :open="props.navbarMenuOpen" @update:open="props.toggleMenu">
+        <MenuTrigger v-bind="props.profile" />
 
-        <PopoverContent class="w-56 overflow-hidden rounded-lg shadow-lg max-h-[calc(100vh-40rem)] mt-2" align="end">
+        <PopoverContent class="w-56 mt-[10px] p-1 pl-2 pr-2 overflow-hidden rounded-lg shadow-lg max-h-[calc(100vh-40rem)]" align="end">
             <SidebarProvider>
-                <SidebarInset class="bg-transparent h-auto w-full">
-                    <Sidebar collapsible="none" class="w-full">
-                        <MenuContent
-                            :toggle-account-menu="props.toggleAccountMenu"
-                            :toggle-theme-menu="props.toggleThemeMenu"
-                            :theme-menu-open="props.themeMenuOpen"
-                            :groups="content"
-                        />
+                <SidebarInset class="bg-transparent h-[calc(100vh-41rem)]">
+                    <Sidebar collapsible="none">
+                        <MenuContent :groups="groups" :theme-menu-open="props.themeMenuOpen" :toggle-theme-menu="props.toggleThemeMenu" />
                     </Sidebar>
                 </SidebarInset>
             </SidebarProvider>

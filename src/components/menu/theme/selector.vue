@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { SidebarMenuItem, SidebarMenuButton, BackButton } from "../../shadcn";
-import type { Theme, ThemeMenuItem, ThemeSelectorProps } from "@/types";
+import { SidebarMenuItem, SidebarMenuButton, BackButton } from "@/components/shadcn";
+import type { ThemeSelectorProps, Theme } from "@/types";
 import { computed, onMounted, ref } from "vue";
 import { Check } from "lucide-vue-next";
+import { capitalize } from "@/utils";
 
-const { item, themeMenuOpen, toggleThemeMenu, itemIndex } = defineProps<ThemeSelectorProps>();
+const props = defineProps<ThemeSelectorProps>();
 
 const currentTheme = ref<Theme>("system");
 
@@ -18,33 +19,29 @@ onMounted(() => {
 const handleSetTheme = (theme: Theme) => {
     localStorage.setItem("theme", theme);
     setCurrentTheme(theme);
-    // Dispatch a custom event to notify listeners with the theme value
     window.dispatchEvent(new CustomEvent("theme-toggle", { detail: theme }));
 };
 
-const shouldShowThemeSelector = computed(() => themeMenuOpen && "themes" in item);
-const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
-
-const themeItem = item as ThemeMenuItem;
+const key = computed<string>(() => `theme-selector-${props.index}`);
 </script>
 
 <template>
-    <template v-if="shouldShowThemeSelector">
-        <SidebarMenuItem :key="`theme-selector-${itemIndex}`">
-            <BackButton
-                class="w-full text-slate-900 dark:text-slate-200"
-                :button-text="themeItem.label || 'Appearances'"
-                @click="toggleThemeMenu"
-            />
+    <template v-if="props.themeMenuOpen && props.item.themes">
+        <SidebarMenuItem :key="key" class="pl-1">
+            <BackButton :btn-text="props.item.label || 'Appearances'" :on-click="props.toggleThemeMenu" />
         </SidebarMenuItem>
 
-        <SidebarMenuItem v-for="(theme, index) in themeItem.themes" :key="`theme-option-${theme.id}-${index}`">
+        <SidebarMenuItem
+            v-for="(theme, index) in props.item.themes"
+            :key="`theme-${theme.theme}-${index}`"
+            class="pl-1 border-b border-slate-50 dark:border-b-slate-800 hover:bg-slate-200 dark:hover:bg-slate-600 rounded-lg w-full hover:cursor-pointer"
+        >
             <SidebarMenuButton
-                @click="handleSetTheme(theme.id)"
-                class="w-full px-4 py-2 border-b border-slate-50 dark:border-b-slate-800 text-left text-sm text-slate-900 hover:bg-slate-200 dark:text-slate-200 dark:hover:bg-slate-600 hover:cursor-pointer"
+                class="w-full px-4 py-2 border-b border-slate-50 dark:border-b-slate-800 text-left text-sm text-slate-900"
+                @click="() => handleSetTheme(theme.theme)"
             >
-                {{ capitalize(theme.id) }}
-                <Check v-if="theme.id === currentTheme" class="ml-3 flex w-full justify-end text-green-500" />
+                {{ capitalize(theme.theme) }}
+                <Check v-if="theme.theme === currentTheme" class="ml-3 flex w-full justify-end text-green-500" />
             </SidebarMenuButton>
         </SidebarMenuItem>
     </template>

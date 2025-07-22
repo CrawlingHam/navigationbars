@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { sidebarMenuButtonVariants } from "../../variants";
 import type { SidebarMenuButtonProps } from "@/types";
-import { cn } from "flixburst-tailwind";
 import { Primitive } from "reka-ui";
+import { cn } from "@/lib";
 
 const props = withDefaults(defineProps<SidebarMenuButtonProps>(), {
     variant: "default",

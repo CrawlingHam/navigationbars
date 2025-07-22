@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import type { HTMLAttributes } from "vue";
-import { cn } from "flixburst-tailwind";
+import type { ClassProp } from "@/types";
+import { cn } from "@/lib";
 
-const props = defineProps<{
-    class?: HTMLAttributes["class"];
-}>();
+const props = defineProps<ClassProp>();
 </script>
 
 <template>

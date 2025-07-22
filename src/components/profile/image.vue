@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import type { ProfileImageProps } from "@/types";
-import { cn } from "flixburst-tailwind";
-import { computed } from "vue";
+import { cn } from "@/lib";
 
-const { alt, className, dimensions, src } = defineProps<ProfileImageProps>();
-
-const styling = computed(() => cn("object-cover", className));
+const props = defineProps<ProfileImageProps>();
 </script>
 
 <template>
-    <img :alt="alt || 'Profile Picture'" :height="dimensions[0]" :width="dimensions[1]" :class="styling" :src="src || ''" />
+    <img
+        :class="cn('object-cover', props.class)"
+        :alt="props.alt || 'Profile Picture'"
+        :height="props.dimensions[0]"
+        :width="props.dimensions[1]"
+        :src="props.src || ''"
+    />
 </template>

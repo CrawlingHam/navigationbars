@@ -7,76 +7,60 @@ import eslintJs from "@eslint/js";
 import globals from "globals";
 
 export default [
+    eslintJs.configs["recommended"],
     {
-        //---- GLOBAL IGNORES
         ignores: ["**/dist/", "**/node_modules/"],
     },
-    // general defaults
-    eslintJs.configs["recommended"],
-    // general
     {
-        files: ["**/*.{js,ts,jsx,tsx,vue}"],
+        files: ["**/*.{ts,vue}"],
         languageOptions: {
             parser: tsParser,
             ecmaVersion: "latest",
             sourceType: "module",
             globals: {
-                process: "readonly",
-                console: "readonly",
-                __dirname: "readonly",
                 ...globals.browser,
+                ...globals.node,
             },
         },
         plugins: {
             "@typescript-eslint": tsPlugin,
         },
         rules: {
-            // General rules
-            "no-console": ["warn", { allow: ["warn", "error", "log"] }],
-            "prefer-const": "error",
-            "no-var": "error",
-            eqeqeq: ["error", "always", { null: "ignore" }],
             "no-unused-vars": "off",
             "@typescript-eslint/no-unused-vars": [
                 "warn",
                 {
-                    args: "after-used",
-                    vars: "all",
-                    caughtErrors: "all",
+                    destructuredArrayIgnorePattern: "^_",
+                    caughtErrorsIgnorePattern: "^_",
+                    ignoreRestSiblings: true,
                     argsIgnorePattern: "^_",
                     varsIgnorePattern: "^_",
-                    caughtErrorsIgnorePattern: "^_",
-                    destructuredArrayIgnorePattern: "^_",
-                    ignoreRestSiblings: true,
+                    caughtErrors: "all",
+                    args: "after-used",
+                    vars: "all",
                 },
             ],
         },
     },
-
-    // typescript
     {
-        files: ["**/*.{ts,tsx,vue}"],
+        files: ["**/*.{ts,vue}"],
         languageOptions: {
             parser: tsEslint.parser,
         },
     },
-
-    // chosen vue defaults
     ...pluginVue.configs["flat/essential"],
-    // vue
     {
         files: ["**/*.vue"],
         languageOptions: {
             parser: vueParser,
             parserOptions: {
-                parser: tsEslint.parser, // parse TS inside VUE
+                parser: tsEslint.parser,
             },
         },
         rules: {
             "vue/multi-word-component-names": "off",
         },
     },
-    // Override for shadcn components
     {
         files: ["src/components/shadcn/ui/**/*.vue"],
         rules: {

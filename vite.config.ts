@@ -4,48 +4,41 @@ import vue from "@vitejs/plugin-vue";
 import { defineConfig } from "vite";
 import { resolve } from "path";
 
-export default defineConfig({
-    plugins: [
-        vue(),
-        tailwindcss(),
-        federation({
-            name: "navigationbar",
-            filename: "remoteEntry.js",
-            exposes: {
-                "./Navigationbar": "./src/app/App.vue",
-            },
-            shared: ["vue", "pinia", "reka-ui"],
-        }),
-    ],
-    resolve: {
-        alias: [
-            {
-                find: "@",
-                replacement: resolve(__dirname, "./src"),
-            },
+export default defineConfig(({ mode }) => {
+    return {
+        base: mode === "production" ? "/navigationbar/vue" : "/",
+        plugins: [
+            vue(),
+            tailwindcss(),
+            federation({
+                exposes: { "./Navigationbar": "./src/app/App.vue" },
+                filename: "remoteEntry.js",
+                name: "navigationbar",
+                shared: ["vue"],
+            }),
         ],
-    },
-    build: {
-        chunkSizeWarningLimit: 600,
-        cssCodeSplit: false,
-        assetsDir: "assets",
-        minify: "esbuild",
-        target: "esnext",
-        outDir: "dist",
-        rollupOptions: {
-            output: {
-                entryFileNames: (assetInfo) => {
-                    if (assetInfo.name === "remoteEntry") {
-                        return "navigationbar/vue/assets/remoteEntry.js";
-                    }
-                    return "assets/[name].js";
+        resolve: {
+            alias: [
+                {
+                    replacement: resolve(__dirname, "./src"),
+                    find: "@",
                 },
-                chunkFileNames: "assets/[name].js",
-                assetFileNames: (assetInfo) => {
-                    if (assetInfo.names?.includes("style.css")) return "assets/style.css";
-                    return "assets/[name][extname]";
+            ],
+        },
+        build: {
+            chunkSizeWarningLimit: 500,
+            cssCodeSplit: false,
+            assetsDir: "assets",
+            minify: "esbuild",
+            target: "esnext",
+            outDir: "dist",
+            rollupOptions: {
+                output: {
+                    assetFileNames: "assets/[name][extname]",
+                    entryFileNames: "assets/[name].js",
+                    chunkFileNames: "assets/[name].js",
                 },
             },
         },
-    },
+    };
 });

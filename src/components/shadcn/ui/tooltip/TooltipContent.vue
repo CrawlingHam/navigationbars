@@ -2,14 +2,12 @@
 import { TooltipArrow, TooltipContent, TooltipPortal, useForwardPropsEmits } from "reka-ui";
 import { type TooltipContentEmits, type TooltipContentProps } from "reka-ui";
 import { reactiveOmit } from "@vueuse/core";
-import type { HTMLAttributes } from "vue";
-import { cn } from "flixburst-tailwind";
+import type { ClassProp } from "@/types";
+import { cn } from "@/lib";
 
-defineOptions({
-    inheritAttrs: false,
-});
+defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<TooltipContentProps & { class?: HTMLAttributes["class"] }>(), {
+const props = withDefaults(defineProps<TooltipContentProps & ClassProp>(), {
     sideOffset: 4,
 });
 

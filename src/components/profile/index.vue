@@ -6,12 +6,15 @@ import UserProfile from "./user.vue";
 
 const props = defineProps<ProfileProps>();
 
-const src = "src" in props ? props.src : undefined;
-const alt = "src" in props ? props.alt : undefined;
-const letter = "letter" in props ? props.letter : "";
+const containsLetter = "letter" in props;
+const containsSrc = "src" in props;
+
+const src = containsSrc ? props.src : undefined;
+const alt = containsSrc ? props.alt : undefined;
+const letter = containsLetter ? props.letter : "";
 </script>
 
 <template>
-    <UserProfile v-if="isValidImageSrc(src)" :dimensions="dimensions" :alt="alt" :src="src" />
-    <GuestProfile v-else :dimensions="dimensions" :letter="letter" />
+    <UserProfile v-if="isValidImageSrc(src)" :dimensions="props.dimensions" :alt="alt" :src="src" />
+    <GuestProfile v-else :dimensions="props.dimensions" :letter="letter" />
 </template>

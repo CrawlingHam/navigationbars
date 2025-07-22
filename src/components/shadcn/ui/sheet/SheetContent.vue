@@ -3,8 +3,8 @@ import { DialogClose, DialogContent, DialogPortal, useForwardPropsEmits } from "
 import { type DialogContentEmits } from "reka-ui";
 import type { SheetContentProps } from "@/types";
 import { reactiveOmit } from "@vueuse/core";
-import { cn } from "flixburst-tailwind";
 import { X } from "lucide-vue-next";
+import { cn } from "@/lib";
 
 defineOptions({
     inheritAttrs: false,

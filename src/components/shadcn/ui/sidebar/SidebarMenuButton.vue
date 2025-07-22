@@ -2,12 +2,11 @@
 import { Tooltip, TooltipContent, TooltipTrigger } from "../tooltip";
 import SidebarMenuButtonChild from "./SidebarMenuButtonChild.vue";
 import type { SidebarMenuButtonProps } from "@/types";
-import { type Component, computed } from "vue";
+import { delegatedProps } from "../../shared";
 import { useSidebar } from "../../contexts";
+import { type Component } from "vue";
 
-defineOptions({
-    inheritAttrs: false,
-});
+defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(
     defineProps<
@@ -24,20 +23,17 @@ const props = withDefaults(
 
 const { isMobile, state } = useSidebar();
 
-const delegatedProps = computed(() => {
-    const { tooltip, ...delegated } = props;
-    return delegated;
-});
+const delegated = delegatedProps(props);
 </script>
 
 <template>
-    <SidebarMenuButtonChild v-if="!tooltip" v-bind="{ ...delegatedProps, ...$attrs }">
+    <SidebarMenuButtonChild v-if="!tooltip" v-bind="{ ...delegated, ...$attrs }">
         <slot />
     </SidebarMenuButtonChild>
 
     <Tooltip v-else>
         <TooltipTrigger as-child>
-            <SidebarMenuButtonChild v-bind="{ ...delegatedProps, ...$attrs }">
+            <SidebarMenuButtonChild v-bind="{ ...delegated, ...$attrs }">
                 <slot />
             </SidebarMenuButtonChild>
         </TooltipTrigger>

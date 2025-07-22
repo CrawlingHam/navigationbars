@@ -1,21 +1,25 @@
 <script setup lang="ts">
-import type { MenuTriggerProps } from "@/types";
-import { ProfilePicture } from "../profile";
+import type { Profile as ProfileType } from "@/types";
 import { PopoverTrigger } from "../shadcn";
+import Profile from "../profile/index.vue";
 import { computed } from "vue";
+import { cn } from "@/lib";
 
-const { profile } = defineProps<MenuTriggerProps>();
+const props = defineProps<ProfileType>();
 
-const letter = computed(() => profile?.name?.charAt(0) || profile?.email?.charAt(0).toUpperCase() || "G");
+const divStyling = computed(() =>
+    cn(
+        "w-9 h-9 rounded-full transition-all duration-200 hover:ring-2 hover:ring-primary/50 hover:scale-105",
+        "flex items-center cursor-pointer bg-slate-200 dark:bg-slate-700 justify-center"
+    )
+);
 </script>
 
 <template>
-    <PopoverTrigger as-child>
+    <PopoverTrigger asChild>
         <button class="relative">
-            <div
-                class="flex items-center cursor-pointer bg-slate-200 dark:bg-slate-700 justify-center w-9 h-9 rounded-full transition-all duration-200 hover:ring-2 hover:scale-105"
-            >
-                <ProfilePicture :dimensions="[32, 32]" :clickable="false" :src="profile?.picture" :letter="letter" />
+            <div :class="divStyling">
+                <Profile :letter="props.username?.charAt(0).toUpperCase() || 'G'" :dimensions="[32, 32]" :src="props.picture" />
             </div>
         </button>
     </PopoverTrigger>
