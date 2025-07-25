@@ -32,8 +32,8 @@ function ThemeSelector(props: ThemeSelectorProps): JSX.Element | null {
                     <SidebarMenuButton
                         onClick={() => handleSetTheme(theme.theme)}
                         className={cn(
-                            "w-full px-4 py-2 border-b border-slate-50 dark:border-b-slate-800 text-left text-sm text-slate-900",
-                            "hover:bg-slate-200 dark:text-slate-200 dark:hover:bg-slate-600 hover:cursor-pointer"
+                            "w-full px-4 py-2 border-b border-slate-100 dark:border-b-slate-800 text-left text-sm text-slate-900",
+                            "hover:bg-slate-100 dark:hover:bg-slate-700 dark:text-slate-200 hover:cursor-pointer"
                         )}
                     >
                         {capitalize(theme.theme)}

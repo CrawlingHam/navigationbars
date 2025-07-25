@@ -11,8 +11,8 @@ const BackButton = ({ btnText, onClick }: { onClick: () => void; btnText: string
             "hover:bg-slate-100 dark:hover:bg-slate-600 hover:cursor-pointer"
         )}
     >
-        <div className="flex items-center gap-2">
-            <MoveLeft className="h-5 w-5" />
+        <div className="flex items-center gap-2 pl-1">
+            <MoveLeft className="h-4 w-4" />
             <span className="font-medium">{btnText}</span>
         </div>
     </SidebarMenuButton>

@@ -15,7 +15,7 @@ function NavigationbarMenu(props: NavigationbarMenuProps): JSX.Element {
         <Popover open={props.navbarMenuOpen} onOpenChange={props.toggleMenu}>
             <MenuTrigger {...props.profile} />
 
-            <PopoverContent className="w-56 mt-[1px] overflow-hidden rounded-lg shadow-lg max-h-[calc(100vh-40rem)]" align="end">
+            <PopoverContent className="w-56 mt-[2px] overflow-hidden rounded-lg shadow-lg max-h-[calc(100vh-40rem)]" align="end">
                 <SidebarProvider>
                     <SidebarInset className="bg-transparent h-auto">
                         <Sidebar collapsible="none">
