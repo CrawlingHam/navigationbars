@@ -12,9 +12,9 @@ export default defineConfig(({ mode }) => {
             tailwindcss(),
             federation({
                 exposes: { "./Navigationbar": "./src/app/App.vue" },
+                shared: ["vue", "reka-ui"],
                 filename: "remoteEntry.js",
                 name: "navigationbar",
-                shared: ["vue"],
             }),
         ],
         resolve: {

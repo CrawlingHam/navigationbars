@@ -1,4 +1,5 @@
 @layer components {
+    /* === Animated Border Bottom Component === */
     .animated-border-b {
         background-color: transparent;
         position: relative;

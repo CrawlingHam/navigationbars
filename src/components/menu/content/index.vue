@@ -8,11 +8,7 @@ const props = defineProps<MenuContentProps>();
 
 <template>
     <SidebarContent v-if="props.groups" class="py-2 h-auto flex-none pr-11">
-        <SidebarGroup
-            class="border-b border-b-slate-200 dark:border-b-slate-600 last:border-none w-full"
-            v-for="(group, index) in props.groups"
-            :key="`group-${index}`"
-        >
+        <SidebarGroup class="w-full" v-for="(group, index) in props.groups" :key="`group-${index}`">
             <SidebarGroupContent class="gap-0">
                 <MenuContentItemsGroup :group="group" :theme-menu-open="props.themeMenuOpen" :toggle-theme-menu="props.toggleThemeMenu" />
             </SidebarGroupContent>

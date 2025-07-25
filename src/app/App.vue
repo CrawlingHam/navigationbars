@@ -15,7 +15,7 @@ const menuOpen = ref<boolean>(false);
             <div class="flex w-full items-center justify-between">
                 <Brand :logo="props.logo" :title="props.title" />
 
-                <div class="flex justify-end mr-8 rounded-full">
+                <div class="flex justify-end mr-8 rounded-full w-full h-full">
                     <Menu
                         :toggle-theme-menu="() => (themeMenuOpen = !themeMenuOpen)"
                         :toggle-menu="() => (menuOpen = !menuOpen)"

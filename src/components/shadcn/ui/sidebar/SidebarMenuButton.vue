@@ -27,7 +27,7 @@ const delegated = delegatedProps(props);
 </script>
 
 <template>
-    <SidebarMenuButtonChild v-if="!tooltip" v-bind="{ ...delegated, ...$attrs }">
+    <SidebarMenuButtonChild v-if="!tooltip" :class="props.class" v-bind="{ ...delegated, ...$attrs }">
         <slot />
     </SidebarMenuButtonChild>
 

@@ -15,7 +15,7 @@ const groups = computed<MenuItemGroups | ThemeSubMenuItem[][]>(() => groupConten
     <Popover :open="props.navbarMenuOpen" @update:open="props.toggleMenu">
         <MenuTrigger v-bind="props.profile" />
 
-        <PopoverContent class="w-56 mt-[10px] p-1 pl-2 pr-2 overflow-hidden rounded-lg shadow-lg max-h-[calc(100vh-40rem)]" align="end">
+        <PopoverContent class="w-56 mt-[-3px] p-1 pl-1 pr-2 overflow-hidden rounded-lg shadow-lg max-h-[calc(100vh-40rem)]" align="end">
             <SidebarProvider>
                 <SidebarInset class="bg-transparent h-[calc(100vh-41rem)]">
                     <Sidebar collapsible="none">
